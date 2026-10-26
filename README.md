@@ -8,7 +8,7 @@
 
 A customizable music player card and floating karaoke lyrics overlay that brings your music to life.
 
-Works with Spotify, YouTube Music in your browser, and other players through the Windows media session API.
+**Works with any music app** that exposes playback information through the Windows media session API, including Spotify, YouTube Music, and other desktop or browser-based players. Lyrics will display as long as a suitable synchronized version of the song's lyrics is available in the LRCLIB library.
 
 **Built by [CyberSecPwner](https://github.com/CyberSecPwnerrr)**
 
@@ -21,6 +21,7 @@ Works with Spotify, YouTube Music in your browser, and other players through the
 ## ✨ Features
 
 - 🎤 **Synced lyrics** — fetched from [LRCLIB](https://lrclib.net) and cached locally.
+- 🎵 **Works with any music app** — supports any player that exposes playback information through the Windows media session API, provided the song has suitable synchronized lyrics in LRCLIB.
 - 🖥️ **Three display modes** — Player card, Floating lyrics, or Card + floating lyrics.
 - 🎵 **Music player card** — album artwork, title, artist, album, progress bar, volume control, and EQ visualizer.
 - 🪟 **Floating lyrics overlay** — display lyrics on the desktop wallpaper layer or above other windows.
@@ -58,7 +59,8 @@ Combine the player card and floating lyrics for a complete desktop music experie
 - **Operating system:** Windows 10 or Windows 11.
 - **Python:** Python 3.9 or newer, required only when running from source.
 - **Internet connection:** Required to retrieve lyrics from LRCLIB when they are not cached.
-- **Media player:** A player that exposes playback information through the Windows media session API.
+- **Music app:** Any music player that exposes playback information through the Windows media session API.
+- **Lyrics availability:** The song must have a suitable synchronized lyrics entry in LRCLIB for lyrics to be displayed.
 
 ---
 
@@ -71,9 +73,9 @@ Want the easy way? Simply download and open the prebuilt `.exe` file. **You do n
 1. Open the [LyricsScreen Releases](https://github.com/CyberSecPwnerrr/LyricScreen/releases) page.
 2. Download the latest Windows executable, if a release is available.
 3. Open the downloaded `.exe` file.
-4. Start playing music in Spotify, YouTube Music, or another supported media player.
+4. Start playing music in your preferred music app.
 
-LyricsScreen will detect the active Windows media session when supported playback information is available.
+LyricsScreen will detect the active Windows media session when supported playback information is available. It can work with different music apps, provided they expose the required media information and the song has suitable synchronized lyrics available in LRCLIB.
 
 > **Note:** A downloadable executable must first be published in the GitHub Releases section. If no release is available yet, use Option 2.
 
@@ -104,9 +106,9 @@ python lyrics_hud.py
 
 #### 5. Start playing music
 
-Play a track in Spotify, YouTube Music, or another supported media player. A **♪ system tray icon** provides access to the application controls and settings.
+Play a track in your preferred music app. A **♪ system tray icon** provides access to the application controls and settings.
 
-> **Browser support:** Hardware media key and media session integration must be enabled. This is generally enabled by default in Chrome, Brave, and Edge.
+> **Browser support:** Browser-based music players must expose playback information through the Windows media session API. Hardware media key and media session integration is generally enabled by default in Chrome, Brave, and Edge.
 
 ---
 
@@ -183,6 +185,8 @@ LyricsScreen retrieves synchronized lyrics from [LRCLIB](https://lrclib.net).
 
 Lyrics are cached locally to reduce repeated network requests.
 
+**Lyrics compatibility:** LyricsScreen is designed to work with any music app that provides the required playback information through the Windows media session API. The music app itself does not need to be specifically supported by LyricsScreen. However, lyrics can only be displayed when a suitable synchronized entry for the current song is available in LRCLIB.
+
 If lyrics are out of sync, use the global hotkeys or synchronization controls in the tray menu.
 
 - **Fine adjustment:** Shift lyrics in 100 ms increments.
@@ -225,6 +229,7 @@ The application uses the public LRCLIB API to look up lyrics for the current tra
 - Make sure the player appears in the Windows volume flyout media controls.
 - Enable browser hardware media control if using a browser-based player.
 - Try playing or pausing the track to refresh the media session.
+- Verify that the music app exposes playback information through the Windows media session API.
 
 ### Lyrics are out of sync
 
@@ -267,7 +272,6 @@ If using the executable, check whether Windows Security has blocked it and ensur
 - [LRCLIB](https://lrclib.net) — synchronized lyrics API.
 - [PyQt6](https://pypi.org/project/PyQt6/) — graphical user interface.
 - [WinRT for Python](https://pypi.org/project/winrt-runtime/) — Windows Runtime integration.
-
 
 <div align="center">
 
