@@ -1,4 +1,4 @@
-# 🎵 Lyrics HUD
+# 🎵 Lyrics HUD (LyricScreen)
 
 A Windows desktop widget that shows **live, time-synced lyrics** for whatever you're playing, as a neon player card, as floating lyrics on your desktop, or both.
 
@@ -30,7 +30,7 @@ It reads the Windows media session directly, so it works with Spotify, YouTube M
 - **Windows 10 / 11** (uses the Windows media session API; the script exits on other systems)
 - **Python 3.9+**
 
-Dependencies are installed automatically on first launch:
+Dependencies are listed in [`requirements.txt`](requirements.txt):
 
 | Package | Purpose |
 |---|---|
@@ -38,13 +38,15 @@ Dependencies are installed automatically on first launch:
 | `winrt-runtime`, `winrt-Windows.Foundation`, `winrt-Windows.Foundation.Collections`, `winrt-Windows.Media`, `winrt-Windows.Media.Control`, `winrt-Windows.Storage.Streams` | Windows media session access |
 | `comtypes`, `pycaw` *(optional)* | System volume control and display |
 
+
 ---
 
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
+git clone https://github.com/CyberSecPwnerrr/LyricScreen.git
+cd LyricScreen
+pip install -r requirements.txt
 python lyrics_hud.py
 ```
 
