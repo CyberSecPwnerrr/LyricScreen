@@ -12,7 +12,7 @@ Works with Spotify, YouTube Music in your browser, and other players through the
 
 **Built by [CyberSecPwner](https://github.com/CyberSecPwnerrr)**
 
-[Features](#-features) · [Installation](#-getting-started) · [Controls](#-controls) · [Troubleshooting](#-troubleshooting)
+[Features](#-features) · [Getting Started](#-getting-started) · [Controls](#-controls) · [Troubleshooting](#-troubleshooting)
 
 </div>
 
@@ -35,6 +35,8 @@ Works with Spotify, YouTube Music in your browser, and other players through the
 - ⌨️ **Global hotkeys** — adjust synchronization and show or hide the HUD.
 - ⚙️ **Extensive customization** — fonts, colors, weight, spacing, outlines, shadows, opacity, FPS, and more.
 
+---
+
 ## 📸 Display Modes
 
 ### Player Card
@@ -54,54 +56,55 @@ Combine the player card and floating lyrics for a complete desktop music experie
 ## 📋 Requirements
 
 - **Operating system:** Windows 10 or Windows 11.
-- **Python:** Python 3.9 or newer.
+- **Python:** Python 3.9 or newer, required only when running from source.
 - **Internet connection:** Required to retrieve lyrics from LRCLIB when they are not cached.
 - **Media player:** A player that exposes playback information through the Windows media session API.
-
-### Dependencies
-
-Install the dependencies listed in [`requirements.txt`](requirements.txt).
-
-| Package | Purpose |
-|---|---|
-| `PyQt6` | User interface and rendering |
-| `winrt-runtime` | Windows Runtime support |
-| `winrt-Windows.Foundation` | Windows Runtime foundation APIs |
-| `winrt-Windows.Foundation.Collections` | Windows Runtime collections |
-| `winrt-Windows.Media` | Media integration |
-| `winrt-Windows.Media.Control` | Windows media session access |
-| `winrt-Windows.Storage.Streams` | Media artwork and stream handling |
-| `comtypes` *(optional)* | Windows COM integration |
-| `pycaw` *(optional)* | System volume integration |
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
+### Option 1: Run the executable (no Python required)
+
+Want the easy way? Simply download and open the prebuilt `.exe` file. **You do not need to install Python or any dependencies.**
+
+1. Open the [LyricsScreen Releases](https://github.com/CyberSecPwnerrr/LyricScreen/releases) page.
+2. Download the latest Windows executable, if a release is available.
+3. Open the downloaded `.exe` file.
+4. Start playing music in Spotify, YouTube Music, or another supported media player.
+
+LyricsScreen will detect the active Windows media session when supported playback information is available.
+
+> **Note:** A downloadable executable must first be published in the GitHub Releases section. If no release is available yet, use Option 2.
+
+### Option 2: Run from source using Python
+
+#### 1. Install Python
+
+Install Python 3.9 or newer if it is not already installed.
+
+#### 2. Clone the repository
 
 ```bash
 git clone https://github.com/CyberSecPwnerrr/LyricScreen.git
 cd LyricScreen
 ```
 
-### 2. Install dependencies
+#### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Launch LyricsScreen
+#### 4. Launch LyricsScreen
 
 ```bash
 python lyrics_hud.py
 ```
 
-### 4. Start playing music
+#### 5. Start playing music
 
-Play a track in Spotify, YouTube Music, or another supported media player. LyricsScreen detects the active Windows media session and displays the HUD when supported playback information is available.
-
-A **♪ system tray icon** provides access to the application controls and settings.
+Play a track in Spotify, YouTube Music, or another supported media player. A **♪ system tray icon** provides access to the application controls and settings.
 
 > **Browser support:** Hardware media key and media session integration must be enabled. This is generally enabled by default in Chrome, Brave, and Edge.
 
@@ -235,14 +238,13 @@ Open the system tray menu and select **Reset card position**.
 
 ### Dependencies fail to install
 
-- Verify that Python 3.9 or newer is installed.
-- Update pip:
+Verify that Python 3.9 or newer is installed, then update pip:
 
 ```bash
 python -m pip install --upgrade pip
 ```
 
-- Retry installation:
+Retry installation:
 
 ```bash
 pip install -r requirements.txt
@@ -250,11 +252,13 @@ pip install -r requirements.txt
 
 ### The application does not launch
 
-Run the application from a terminal to inspect any error messages:
+When running from source, launch it from a terminal to inspect any error messages:
 
 ```bash
 python lyrics_hud.py
 ```
+
+If using the executable, check whether Windows Security has blocked it and ensure you downloaded it from the official repository.
 
 ---
 
@@ -264,9 +268,6 @@ python lyrics_hud.py
 - [PyQt6](https://pypi.org/project/PyQt6/) — graphical user interface.
 - [WinRT for Python](https://pypi.org/project/winrt-runtime/) — Windows Runtime integration.
 
----
-
----
 
 <div align="center">
 
