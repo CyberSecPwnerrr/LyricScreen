@@ -67,7 +67,194 @@ def ensure_packages():
     importlib.invalidate_caches()
 
 
-ensure_packages()
+# ---------------------------------------------------------------------------
+# Self-install (PyInstaller build only)
+# First run of a downloaded LyricsScreen.exe copies itself to
+# "C:\Program Files\Lyrics Screen", adds a Desktop shortcut and launches the
+# installed copy. Runs of the installed copy start the app normally.
+# Flags: --no-install (run from where it is), --selftest (build check)
+# ---------------------------------------------------------------------------
+APP_NAME = "Lyrics Screen"
+EXE_NAME = "LyricsScreen.exe"
+FROZEN = bool(getattr(sys, "frozen", False))
+
+
+class _SEI(ctypes.Structure):
+    _fields_ = [
+        ("cbSize", wintypes.DWORD),
+        ("fMask", ctypes.c_ulong),
+        ("hwnd", wintypes.HWND),
+        ("lpVerb", wintypes.LPCWSTR),
+        ("lpFile", wintypes.LPCWSTR),
+        ("lpParameters", wintypes.LPCWSTR),
+        ("lpDirectory", wintypes.LPCWSTR),
+        ("nShow", ctypes.c_int),
+        ("hInstApp", wintypes.HINSTANCE),
+        ("lpIDList", ctypes.c_void_p),
+        ("lpClass", wintypes.LPCWSTR),
+        ("hkeyClass", wintypes.HKEY),
+        ("dwHotKey", wintypes.DWORD),
+        ("hIcon", wintypes.HANDLE),
+        ("hProcess", wintypes.HANDLE),
+    ]
+
+
+def _msgbox(text):
+    try:
+        ctypes.windll.user32.MessageBoxW(None, text, APP_NAME, 0x10)
+    except Exception:
+        pass
+
+
+def _is_admin():
+    try:
+        return bool(ctypes.windll.shell32.IsUserAnAdmin())
+    except Exception:
+        return False
+
+
+def _install_dir():
+    base = os.environ.get("ProgramW6432") or os.environ.get("ProgramFiles") or r"C:\Program Files"
+    return Path(base) / APP_NAME
+
+
+def _same_path(a, b):
+    return os.path.normcase(os.path.abspath(str(a))) == os.path.normcase(os.path.abspath(str(b)))
+
+
+def _clean_env():
+    env = dict(os.environ)
+    env["PYINSTALLER_RESET_ENVIRONMENT"] = "1"
+    env.pop("_MEIPASS2", None)
+    return env
+
+
+def _do_copy(src, dst_dir):
+    import shutil
+
+    try:
+        dst_dir.mkdir(parents=True, exist_ok=True)
+        tmp = dst_dir / (EXE_NAME + ".new")
+        shutil.copy2(str(src), str(tmp))
+        os.replace(str(tmp), str(dst_dir / EXE_NAME))
+        return 0
+    except Exception:
+        return 1
+
+
+def _run_elevated(exe, params):
+    """Run exe elevated and wait. Returns the exit code, or None if UAC was declined."""
+    k = ctypes.windll.kernel32
+    k.WaitForSingleObject.argtypes = [wintypes.HANDLE, wintypes.DWORD]
+    k.GetExitCodeProcess.argtypes = [wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD)]
+    k.CloseHandle.argtypes = [wintypes.HANDLE]
+    ctypes.windll.shell32.ShellExecuteExW.argtypes = [ctypes.POINTER(_SEI)]
+    os.environ["PYINSTALLER_RESET_ENVIRONMENT"] = "1"
+    os.environ.pop("_MEIPASS2", None)
+    sei = _SEI()
+    sei.cbSize = ctypes.sizeof(_SEI)
+    sei.fMask = 0x00000040  # SEE_MASK_NOCLOSEPROCESS
+    sei.lpVerb = "runas"
+    sei.lpFile = exe
+    sei.lpParameters = params
+    sei.nShow = 0  # SW_HIDE
+    if not ctypes.windll.shell32.ShellExecuteExW(ctypes.byref(sei)):
+        return None
+    k.WaitForSingleObject(sei.hProcess, 180000)
+    code = wintypes.DWORD(1)
+    k.GetExitCodeProcess(sei.hProcess, ctypes.byref(code))
+    k.CloseHandle(sei.hProcess)
+    return int(code.value)
+
+
+def _make_desktop_shortcut(target):
+    script = (
+        "$d=[Environment]::GetFolderPath('Desktop');"
+        "$s=(New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $d ($env:LH_NAME+'.lnk')));"
+        "$s.TargetPath=$env:LH_EXE;"
+        "$s.WorkingDirectory=Split-Path $env:LH_EXE;"
+        "$s.IconLocation=$env:LH_EXE;"
+        "$s.Description=$env:LH_NAME;"
+        "$s.Save()"
+    )
+    env = dict(os.environ, LH_NAME=APP_NAME, LH_EXE=str(target))
+    try:
+        subprocess.run(
+            ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", script],
+            env=env,
+            creationflags=0x08000000,
+            timeout=60,
+            check=False,
+        )
+    except Exception:
+        pass
+
+
+def _make_font_dir(d):
+    try:
+        d.mkdir(parents=True, exist_ok=True)
+        subprocess.run(
+            ["icacls", str(d), "/grant", "*S-1-5-32-545:(OI)(CI)M"],
+            creationflags=0x08000000,
+            timeout=30,
+            check=False,
+        )
+        return 0
+    except Exception:
+        return 1
+
+
+def self_install():
+    if not FROZEN or "--no-install" in sys.argv:
+        return
+    if "--install-copy" in sys.argv:  # elevated helper: copy and exit
+        i = sys.argv.index("--install-copy")
+        sys.exit(_do_copy(Path(sys.argv[i + 1]), Path(sys.argv[i + 2])))
+    if "--make-font-dir" in sys.argv:
+        i = sys.argv.index("--make-font-dir")
+        sys.exit(_make_font_dir(Path(sys.argv[i + 1])))
+    exe = Path(sys.executable)
+    target_dir = _install_dir()
+    target = target_dir / EXE_NAME
+    if _same_path(exe.parent, target_dir):
+        return  # already the installed copy -> just run the app
+    import filecmp
+
+    try:
+        up_to_date = target.exists() and filecmp.cmp(str(exe), str(target), shallow=False)
+    except Exception:
+        up_to_date = False
+    if not up_to_date:
+        if _is_admin():
+            code = _do_copy(exe, target_dir)
+        else:
+            code = _run_elevated(str(exe), subprocess.list2cmdline(["--install-copy", str(exe), str(target_dir)]))
+        if code is None:
+            return  # UAC declined -> run portable from the current location
+        if code != 0 or not target.exists():
+            _msgbox(
+                "Could not install to:\n" + str(target_dir) + "\n\n"
+                "If Lyrics Screen is already running, quit it from the tray icon and open this file again."
+            )
+            sys.exit(1)
+    _make_desktop_shortcut(target)
+    try:
+        subprocess.Popen(
+            [str(target)],
+            cwd=str(target_dir),
+            env=_clean_env(),
+            close_fds=True,
+            creationflags=0x00000008 | 0x00000200,  # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
+        )
+    except Exception as e:
+        _msgbox("Installed, but could not start the app:\n" + str(e))
+        sys.exit(1)
+    sys.exit(0)
+
+
+self_install()
+if not FROZEN:
+    ensure_packages()
 
 from PyQt6.QtCore import Qt, QThread, QObject, QTimer, QRectF, QPointF, QPoint, pyqtSignal
 from PyQt6.QtGui import (
@@ -130,6 +317,34 @@ OFFS_PATH = APP_DIR / "track_offsets.json"
 APP_DIR.mkdir(parents=True, exist_ok=True)
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
+
+def _resolve_font_dir():
+    base = Path(sys.executable).parent if FROZEN else Path(os.path.abspath(__file__)).parent
+    if (
+        FROZEN
+        and "--no-install" not in sys.argv
+        and not (base / "Font").exists()
+        and not _is_admin()
+        and _same_path(base, _install_dir())
+    ):
+        _run_elevated(sys.executable, subprocess.list2cmdline(["--make-font-dir", str(base / "Font")]))
+    for d in (base / "Font", APP_DIR / "Font"):
+        try:
+            d.mkdir(parents=True, exist_ok=True)
+            probe = d / ".write_test"
+            probe.write_text("x")
+            probe.unlink()
+            return d
+        except Exception:
+            continue
+    return APP_DIR
+
+
+FONT_DIR = _resolve_font_dir()
+FONT_EXTS = (".ttf", ".otf", ".ttc")
+GF_META = "https://fonts.google.com/metadata/fonts"
+GF_CSS = "https://fonts.googleapis.com/css"
+
 DEFAULT_FAMILY = "Segoe UI"
 API = "https://lrclib.net/api"
 UA = "LyricsHUD/2.0 (desktop lyrics widget)"
@@ -165,6 +380,7 @@ DEFAULTS = {
     "font_size": 26,
     "glow": 70,
     "opacity": 96,
+    "lyric_opacity": 100,
     "offset_ms": 0,
     "hold": 100,
     "fade_ms": 450,
@@ -1277,18 +1493,34 @@ def wrap_text(text, fm, maxw):
     spaced = " " in text
     tokens = text.split(" ") if spaced else list(text)
     sep = " " if spaced else ""
-    out = []
-    cur = ""
-    for tk in tokens:
-        cand = cur + sep + tk if cur else tk
-        if fm.horizontalAdvance(cand) <= maxw or not cur:
-            cur = cand
-        else:
+
+    def greedy(limit):
+        out = []
+        cur = ""
+        for tk in tokens:
+            cand = cur + sep + tk if cur else tk
+            if fm.horizontalAdvance(cand) <= limit or not cur:
+                cur = cand
+            else:
+                out.append(cur)
+                cur = tk
+        if cur:
             out.append(cur)
-            cur = tk
-    if cur:
-        out.append(cur)
-    return out or [text]
+        return out
+
+    rows = greedy(maxw)
+    if len(rows) > 1:
+        hi = int(maxw)
+        lo = min(int(max(fm.horizontalAdvance(t) for t in tokens)), hi)
+        n = len(rows)
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if len(greedy(mid)) <= n:
+                hi = mid
+            else:
+                lo = mid + 1
+        rows = greedy(hi)
+    return rows or [text]
 
 
 def render_line(text, font, fill, glowc, glow, maxw, dpr, scan, align, sty=None, fill2=None):
@@ -1416,18 +1648,22 @@ def draw_karaoke(p, dim, bright, prog, alpha, karaoke, flick=1.0, dim_a=0.42):
     oy = -bright[2] / 2.0
     if karaoke and dim is not None:
         p.setOpacity(clamp(alpha * dim_a, 0.0, 1.0))
-        p.drawPixmap(QPointF(ox, oy), dim[0])
+        p.drawPixmap(QPointF(-dim[1] / 2.0, -dim[2] / 2.0), dim[0])
         pad = bright[4]
-        total = sum(r[2] for r in bright[3]) or 1.0
+        rows = bright[3]
+        total = sum(r[2] for r in rows) or 1.0
         used = prog * total
         path = QPainterPath()
-        for rx, ry, rw, rh in bright[3]:
+        last = len(rows) - 1
+        for k, (rx, ry, rw, rh) in enumerate(rows):
             take = clamp(used, 0.0, rw)
             used -= rw
             if take <= 0:
                 continue
             width = take + pad + (pad if take >= rw - 0.5 else 0.0)
-            path.addRect(QRectF(ox + rx - pad, oy + ry - pad, width, rh + 2 * pad))
+            y0 = 0.0 if k == 0 else ry
+            y1 = bright[2] if k == last else ry + rh
+            path.addRect(QRectF(ox + rx - pad, oy + y0, width, y1 - y0))
         if not path.isEmpty():
             p.setClipPath(path)
             p.setOpacity(clamp(alpha * flick, 0.0, 1.0))
@@ -2329,6 +2565,7 @@ class Hud(QWidget):
         fill, fill2, gcol = lyric_colors(cfg, tp)
         dim_a = cfg["dim_level"] / 100.0
         mo = cfg["motion"] / 100.0
+        lop = cfg["lyric_opacity"] / 100.0
         p.save()
         p.setClipRect(area)
         for i, a, prog, age, eo in lines:
@@ -2343,7 +2580,7 @@ class Hud(QWidget):
             yy = area.center().y() + 16 * mo * (1.0 - enter) - 18 * mo * ease(eo)
             p.save()
             p.translate(area.center().x(), yy)
-            draw_karaoke(p, dim, bright, prog, a * op, karaoke, 1.0, dim_a)
+            draw_karaoke(p, dim, bright, prog, a * op * lop, karaoke, 1.0, dim_a)
             p.restore()
         p.restore()
         p.setOpacity(op)
@@ -2798,6 +3035,7 @@ class Holo(QWidget):
         fill, fill2, gcol = lyric_colors(cfg, pal)
         dim_a = cfg["dim_level"] / 100.0
         mo = cfg["motion"] / 100.0
+        lop = cfg["lyric_opacity"] / 100.0
         wf = cfg["holo_width"] / 100.0
         gs = cfg["ghost"] / 100.0
         es = cfg["enter_style"]
@@ -2874,9 +3112,9 @@ class Holo(QWidget):
                     gx += random.uniform(6, 14)
                     flick *= random.uniform(0.65, 1.0)
             if gs > 0.01:
-                p.setOpacity(clamp(a * 0.4 * fade * gs, 0.0, 1.0))
+                p.setOpacity(clamp(a * 0.4 * fade * gs * lop, 0.0, 1.0))
                 p.drawPixmap(QPointF(-ghost[1] / 2.0 - gx, -ghost[2] / 2.0 + 1), ghost[0])
-            draw_karaoke(p, dim, bright, prog, a * fade, karaoke, flick, dim_a)
+            draw_karaoke(p, dim, bright, prog, a * fade * lop, karaoke, flick, dim_a)
             p.resetTransform()
         p.setOpacity(1.0)
 
@@ -3038,6 +3276,102 @@ def dark_titlebar(widget, pal):
         ctypes.windll.dwmapi.DwmSetWindowAttribute(hwnd, 36, ctypes.byref(tref), ctypes.sizeof(tref))
     except Exception:
         pass
+
+
+def list_font_files():
+    out = []
+    try:
+        for p in sorted(FONT_DIR.iterdir(), key=lambda x: x.name.lower()):
+            if p.is_file() and p.suffix.lower() in FONT_EXTS:
+                out.append(p)
+    except Exception:
+        pass
+    return out
+
+
+def google_font_index():
+    req = urlrequest.Request(GF_META, headers={"User-Agent": UA})
+    with urlrequest.urlopen(req, timeout=15) as r:
+        raw = r.read().decode("utf-8", "replace")
+    data = json.loads(raw[raw.find("{"):])
+    out = []
+    for f in data.get("familyMetadataList", []):
+        name = f.get("family")
+        if name:
+            out.append((name, f.get("category") or "", list((f.get("fonts") or {}).keys())))
+    return out
+
+
+def download_google_font(family, variants):
+    weight = "400" if "400" in variants else next((v for v in variants if v.isdigit()), "400")
+    query = urlparse.urlencode({"family": family + ":" + weight})
+    req = urlrequest.Request(GF_CSS + "?" + query, headers={"User-Agent": UA})
+    with urlrequest.urlopen(req, timeout=15) as r:
+        css = r.read().decode("utf-8", "replace")
+    urls = re.findall(r"url\((https?://[^)\s]+)\)", css)
+    if not urls:
+        raise ValueError("no font file found")
+    url = next((u for u in urls if u.lower().endswith((".ttf", ".otf"))), urls[0])
+    ext = os.path.splitext(urlparse.urlparse(url).path)[1].lower()
+    if ext not in FONT_EXTS:
+        ext = ".ttf"
+    safe = re.sub(r"[^A-Za-z0-9]+", "", family) or "Font"
+    dest = FONT_DIR / (safe + "-Regular" + ext)
+    req = urlrequest.Request(url, headers={"User-Agent": UA})
+    with urlrequest.urlopen(req, timeout=30) as r:
+        blob = r.read()
+    tmp = dest.with_name(dest.name + ".part")
+    tmp.write_bytes(blob)
+    os.replace(str(tmp), str(dest))
+    return dest
+
+
+class FontNet(QObject):
+    index_ready = pyqtSignal()
+    index_failed = pyqtSignal(str)
+    downloaded = pyqtSignal(str)
+    failed = pyqtSignal(str)
+    index = None
+
+    def _emit(self, sig, *args):
+        try:
+            sig.emit(*args)
+        except RuntimeError:
+            pass
+
+    def load_index(self):
+        if FontNet.index is not None:
+            self.index_ready.emit()
+            return
+
+        def run():
+            try:
+                FontNet.index = google_font_index()
+            except Exception as e:
+                self._emit(self.index_failed, str(e))
+                return
+            self._emit(self.index_ready)
+
+        threading.Thread(target=run, daemon=True).start()
+
+    def download(self, family, variants):
+        def run():
+            try:
+                path = str(download_google_font(family, variants))
+            except Exception as e:
+                self._emit(self.failed, str(e))
+                return
+            self._emit(self.downloaded, path)
+
+        threading.Thread(target=run, daemon=True).start()
+
+
+class FontCombo(QComboBox):
+    about_to_open = pyqtSignal()
+
+    def showPopup(self):
+        self.about_to_open.emit()
+        super().showPopup()
 
 
 class SettingsDialog(QDialog):
@@ -3314,6 +3648,44 @@ class SettingsDialog(QDialog):
         self.row(lay, "Secondary", self.color("secondary"))
         self.row(lay, "Text", self.color("text"))
         self.sec(lay, "Typography")
+        self.fnet = FontNet()
+        self.fnet.index_ready.connect(self.on_index_ready)
+        self.fnet.index_failed.connect(self.on_index_failed)
+        self.fnet.downloaded.connect(self.on_downloaded)
+        self.fnet.failed.connect(self.on_download_failed)
+        self.font_combo = FontCombo()
+        self.font_combo.setFixedWidth(200)
+        self.fill_font_combo()
+        self.font_combo.about_to_open.connect(self.fill_font_combo)
+        self.font_combo.currentIndexChanged.connect(self.on_font_combo)
+        self.row(lay, "Font", self.font_combo, f"Every font file inside {FONT_DIR} shows up here")
+        self.font_query = QLineEdit()
+        self.font_query.setPlaceholderText("Search Google Fonts")
+        self.font_query.setFixedWidth(120)
+        self.font_query.returnPressed.connect(self.search_fonts)
+        search_btn = QPushButton("Search")
+        search_btn.clicked.connect(self.search_fonts)
+        qbox = QWidget()
+        ql = QHBoxLayout(qbox)
+        ql.setContentsMargins(0, 0, 0, 0)
+        ql.addWidget(self.font_query)
+        ql.addWidget(search_btn)
+        self.row(lay, "Download fonts", qbox, "Downloaded fonts are saved into the Font folder")
+        self.result_combo = QComboBox()
+        self.result_combo.setFixedWidth(200)
+        self.dl_button = QPushButton("Download")
+        self.dl_button.setEnabled(False)
+        self.dl_button.clicked.connect(self.download_font)
+        rbox = QWidget()
+        rl = QHBoxLayout(rbox)
+        rl.setContentsMargins(0, 0, 0, 0)
+        rl.addWidget(self.result_combo)
+        rl.addWidget(self.dl_button)
+        self.row(lay, "Search results", rbox)
+        self.dl_info = QLabel()
+        self.dl_info.setObjectName("hint")
+        self.dl_info.setWordWrap(True)
+        lay.addWidget(self.dl_info)
         self.font_edit = QLineEdit(self.cfg["font_path"])
         self.font_edit.setReadOnly(True)
         self.font_edit.setPlaceholderText("Default (Segoe UI)")
@@ -3354,6 +3726,7 @@ class SettingsDialog(QDialog):
             "Soft gradient fades the text color into the secondary color across each line",
         )
         self.row(lay, "Glow", self.slider("glow", 0, 100, "%"))
+        self.row(lay, "Lyric opacity", self.slider("lyric_opacity", 10, 100, "%"))
         self.row(
             lay,
             "Glow color",
@@ -3564,18 +3937,79 @@ class SettingsDialog(QDialog):
             self.font_info.setText("Using Segoe UI")
 
     def pick_font(self):
-        path, _ = QFileDialog.getOpenFileName(self, "Choose font file", "", "Fonts (*.ttf *.otf *.ttc)")
+        path, _ = QFileDialog.getOpenFileName(self, "Choose font file", str(FONT_DIR), "Fonts (*.ttf *.otf *.ttc)")
         if path:
             self.cfg["font_path"] = path
             self.font_edit.setText(path)
             self.ctl.refresh()
             self.update_font_info()
+            self.fill_font_combo()
 
     def clear_font(self):
         self.cfg["font_path"] = ""
         self.font_edit.setText("")
         self.ctl.refresh()
         self.update_font_info()
+        self.fill_font_combo()
+
+    def fill_font_combo(self):
+        c = self.font_combo
+        c.blockSignals(True)
+        c.clear()
+        c.addItem("Default (Segoe UI)", "")
+        for p in list_font_files():
+            c.addItem(p.stem, str(p))
+        cur = self.cfg["font_path"]
+        i = c.findData(cur)
+        if cur and i < 0:
+            c.addItem(Path(cur).name, cur)
+            i = c.count() - 1
+        c.setCurrentIndex(max(0, i))
+        c.blockSignals(False)
+
+    def on_font_combo(self, _):
+        path = self.font_combo.currentData() or ""
+        self.cfg["font_path"] = path
+        self.font_edit.setText(path)
+        self.ctl.refresh()
+        self.update_font_info()
+
+    def search_fonts(self):
+        self.dl_info.setText("Searching...")
+        self.fnet.load_index()
+
+    def on_index_ready(self):
+        q = self.font_query.text().strip().lower()
+        found = [f for f in (FontNet.index or []) if q in f[0].lower()]
+        found.sort(key=lambda f: (not f[0].lower().startswith(q), f[0].lower()))
+        self.result_combo.clear()
+        for name, cat, variants in found[:60]:
+            self.result_combo.addItem(f"{name} ({cat})" if cat else name, (name, variants))
+        self.dl_button.setEnabled(bool(found))
+        if found:
+            self.dl_info.setText(f"{len(found)} found" + (", showing the first 60" if len(found) > 60 else ""))
+        else:
+            self.dl_info.setText("No fonts found")
+
+    def on_index_failed(self, msg):
+        self.dl_info.setText("Could not reach Google Fonts: " + msg)
+
+    def download_font(self):
+        d = self.result_combo.currentData()
+        if not d:
+            return
+        self.dl_info.setText(f"Downloading {d[0]}...")
+        self.dl_button.setEnabled(False)
+        self.fnet.download(d[0], d[1])
+
+    def on_downloaded(self, path):
+        self.dl_button.setEnabled(True)
+        self.dl_info.setText("Saved to " + path)
+        self.fill_font_combo()
+
+    def on_download_failed(self, msg):
+        self.dl_button.setEnabled(True)
+        self.dl_info.setText("Download failed: " + msg)
 
     def on_reset(self):
         self.cfg.reset()
@@ -3854,7 +4288,41 @@ class Controller:
             self.toggle_visible()
 
 
+def selftest():
+    """Build check: PyQt, winrt media session and optional volume control."""
+    lines = []
+    code = 0
+    try:
+        app = QApplication(sys.argv[:1])
+        lines.append("PyQt6 OK")
+    except Exception as e:
+        lines.append("PyQt6 FAILED: %r" % (e,))
+        code = 2
+    try:
+        async def go():
+            mgr = await SessionManager.request_async()
+            mgr.get_sessions()
+
+        asyncio.run(go())
+        lines.append("winrt media session OK")
+    except Exception as e:
+        lines.append("winrt media session FAILED: %r" % (e,))
+        code = 2
+    try:
+        lines.append("volume control: " + ("OK" if VolumeControl().available else "unavailable (optional)"))
+    except Exception as e:
+        lines.append("volume control: unavailable (%r)" % (e,))
+    try:
+        out = Path(os.environ.get("TEMP") or Path.home()) / "LyricsScreen_selftest.txt"
+        out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    except Exception:
+        pass
+    return code
+
+
 def main():
+    if "--selftest" in sys.argv:
+        sys.exit(selftest())
     QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     app = QApplication(sys.argv)
     app.setApplicationName("LyricsHUD")
