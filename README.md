@@ -16,6 +16,14 @@ A customizable music player card and floating karaoke lyrics overlay that brings
 
 </div>
 
+
+<p align="center">
+  <a href="https://github.com/CyberSecPwnerrr/LyricScreen/releases">
+    <img src="assets/download.png" alt="Download LyricsScreen" width="600">
+  </a>
+</p>
+
+
 ---
 
 ## ✨ Features
