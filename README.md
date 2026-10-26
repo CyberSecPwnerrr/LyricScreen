@@ -20,7 +20,6 @@ A customizable music player card and floating karaoke lyrics overlay that brings
     <img src="assets/download.png" alt="Download LyricsScreen" width="600">
   </a>
 </p>
----
 
 ## ✨ Features
 
