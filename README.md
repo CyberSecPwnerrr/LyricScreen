@@ -21,7 +21,7 @@ Works with music apps that expose playback information through the Windows media
 </p>
 
 <details>
-<summary><strong>✨ Click Here to See What's New in V7</strong></summary>
+<summary><strong>✨ Click Here to See What's New in V8</strong></summary>
 
 <br>
 
