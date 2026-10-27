@@ -25,20 +25,27 @@ Works with music apps that expose playback information through the Windows media
 
 <br>
 
-### 🆕 What's New in V7
+### 🆕 What's New in V8
 
-- 🕒 **Live Desktop Clock** — A draggable clock with 12/24-hour time, seconds, date, custom backgrounds, blur, and opacity controls.
-- 🎨 **New Themes** — Multiple built-in themes, custom colors, and additional album-art color styles.
-- 🖋️ **Google Fonts Integration** — Search and download fonts directly from the application.
-- 💾 **Settings Profiles** — Save and load named configurations.
-- 🔗 **Shareable Settings Codes** — Export and import customization settings using share codes.
-- 🔊 **Custom Launch Audio** — Play your own sound when LyricsScreen starts, with volume controls and sound preview.
-- 👋 **Welcome Screen** — An optional startup greeting with a preview.
-- 🖼️ **Custom Backgrounds** — Personalize the player card, clock, and application menus with images.
-- 🎬 **Expanded Animations** — New lyric entrance and exit animations, idle motion, and enhanced visual effects.
-- ⚡ **Quick Customize** — Quickly access common appearance settings.
-- 🪟 **Fullscreen Auto-Hide** — Automatically hide the player card, clock, and lyrics while another application is fullscreen.
-- 🎛️ **More Customization** — Expanded controls for card styling, typography, overlays, interface animations, and performance.
+V8 takes LyricsScreen to the next level with more control, deeper customization, new desktop widgets, and enhanced visual effects!
+
+- 📊 **System Performance Monitor** — Track CPU, RAM, FPS, rendering performance, and running processes directly on your desktop.
+- 🎛️ **Customizable Top Bar** — A new configurable interface with animated equalizer bars, adjustable positioning, and layout options.
+- 🎨 **Expanded Theme System** — Explore more visual themes, including Aurora, Frosted Glass, Crystal, Sakura, Emerald, and more.
+- 🌈 **Advanced Color Modes** — New adaptive color palettes, custom lyric gradients, and additional color combinations.
+- ✨ **Enhanced Lyric Animations** — More entrance and exit effects, smoother transitions, and customizable idle animations.
+- 🖥️ **Desktop Wallpaper Lyrics** — Display lyrics as part of your desktop wallpaper layer, with adjustable dimming and blending.
+- 🖥️ **Multi-Monitor Support** — Choose which screen displays your floating lyrics and customize their size and positioning.
+- 🎚️ **Advanced Performance Controls** — Fine-tune animation FPS and optimization settings for a smoother experience.
+- 🎵 **Improved Player Controls** — Better volume control, playback shortcuts, and more control over the player overlay.
+- 🧊 **More Visual Customization** — Adjust card sizes, glass effects, blur, shadows, borders, glow, and transparency.
+- ⌨️ **Keyboard Shortcuts** — Control playback and synchronize lyrics more conveniently.
+- 🔄 **Automatic Updates** — Optional update checks to help you stay up to date.
+- ⚙️ **More Settings & Fine-Tuning** — Additional options for lyric placement, synchronization, animations, interface behavior, and widgets.
+
+**V8 is all about more control, more personalization, and a better desktop lyrics experience.**
+
+💜 Thanks for supporting LyricsScreen! Don't forget to ⭐ star the project on GitHub and follow for future updates.
 
 </details>
 
