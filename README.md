@@ -1,8 +1,8 @@
 ![LyricsScreen Banner](assets/banner.png)
-
-<div align="center">
 # 📃 LyricScreen Website
 **https://lyricscreen.netlify.app**
+<div align="center">
+
 # 🎵 Lyrics HUD — LyricsScreen
 
 **Live, time-synced lyrics and a customizable desktop music experience for Windows.**
