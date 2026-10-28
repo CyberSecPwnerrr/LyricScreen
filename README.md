@@ -3,7 +3,8 @@
 <div align="center">
 
 # 🎵 Lyrics HUD — LyricsScreen
-
+# 📃 LyricScreen Website
+**https://lyricscreen.netlify.app**
 **Live, time-synced lyrics and a customizable desktop music experience for Windows.**
 
 A music player card, floating karaoke lyrics, live clock, custom themes, and animated desktop widgets — all in one application.
