@@ -1,111 +1,103 @@
-<div align="center">
-
-<img src="assets/banner.png" alt="LyricsScreen banner" width="100%">
-
-<br>
-
-<a href="https://github.com/CyberSecPwnerrr/LyricScreen/releases"><img src="https://img.shields.io/badge/●%20V10%20out%20now-0a0a0a?style=for-the-badge&labelColor=0a0a0a" alt="V10 out now"></a>
-
-# Lyrics, on your desktop.
-
-**Your music. Your lyrics. Always in sync.**
-
-Made in Python and packaged with PyInstaller. Run it once and it installs itself.
-
-<p>
-  <a href="https://github.com/CyberSecPwnerrr/LyricScreen/releases"><img src="https://img.shields.io/badge/Download-V10-1c1c1c?style=for-the-badge&logo=github&logoColor=white" alt="Download V10"></a>
-  <a href="https://github.com/CyberSecPwnerrr/LyricScreen"><img src="https://img.shields.io/badge/Star%20on-GitHub-1c1c1c?style=for-the-badge&logo=github&logoColor=white" alt="Star on GitHub"></a>
-  <a href="https://lyricscreen.netlify.app"><img src="https://img.shields.io/badge/Website-lyricscreen.netlify.app-1c1c1c?style=for-the-badge&logo=netlify&logoColor=white" alt="Website"></a>
+<p align="center">
+  <img src="assets/banner.svg" alt="LyricScreen" width="100%">
 </p>
 
-<p>
-  <img src="https://img.shields.io/github/stars/CyberSecPwnerrr/LyricScreen?style=for-the-badge&logo=github&label=GitHub%20stars&labelColor=0a0a0a&color=3a3a3a" alt="GitHub stars">
-  <img src="https://img.shields.io/github/downloads/CyberSecPwnerrr/LyricScreen/total?style=for-the-badge&logo=github&label=Total%20downloads&labelColor=0a0a0a&color=3a3a3a" alt="Total downloads">
-  <img src="https://img.shields.io/badge/Latest%20version-V10-3a3a3a?style=for-the-badge&labelColor=0a0a0a" alt="Latest version V10">
+<h1 align="center">Lyrics, on your desktop.</h1>
+
+<p align="center">
+  <b>Your music. Your lyrics. Always in sync.</b><br>
+  Made in Python and packaged with PyInstaller. Run it once and it installs itself.
 </p>
 
-<p>
-  <a href="#everything-on-your-screen">Features</a> ·
-  <a href="#hear-it-read-it">Web player</a> ·
-  <a href="#one-click-ready-to-use">Install</a> ·
-  <a href="#controls">Controls</a> ·
+<p align="center">
+  <a href="https://github.com/CyberSecPwnerrr/LyricScreen/releases"><b>Download V10</b></a>
+  &nbsp;&nbsp;/&nbsp;&nbsp;
+  <a href="https://lyricscreen.netlify.app">Website</a>
+  &nbsp;&nbsp;/&nbsp;&nbsp;
+  <a href="https://github.com/CyberSecPwnerrr/LyricScreen">Source</a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/stars/CyberSecPwnerrr/LyricScreen?style=flat-square&label=stars&labelColor=0a0a0a&color=3a3a3a" alt="GitHub stars">
+  <img src="https://img.shields.io/github/downloads/CyberSecPwnerrr/LyricScreen/total?style=flat-square&label=downloads&labelColor=0a0a0a&color=3a3a3a" alt="Total downloads">
+  <img src="https://img.shields.io/badge/version-V10-3a3a3a?style=flat-square&labelColor=0a0a0a" alt="Version V10">
+  <img src="https://img.shields.io/badge/platform-Windows-3a3a3a?style=flat-square&labelColor=0a0a0a" alt="Windows">
+</p>
+
+<p align="center">
+  <a href="#hear-it-read-it">Web player</a> &nbsp;/&nbsp;
+  <a href="#everything-on-your-screen">Features</a> &nbsp;/&nbsp;
+  <a href="#one-click-ready-to-use">Install</a> &nbsp;/&nbsp;
+  <a href="#controls">Controls</a> &nbsp;/&nbsp;
   <a href="#troubleshooting">Troubleshooting</a>
 </p>
 
-</div>
+<img src="assets/dotline.svg" width="100%" alt="">
 
-<p align="center">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+LyricScreen puts synced lyrics and a music player on your Windows desktop. Use a compact player card, a floating lyrics overlay, or both together, and change the colors, animations and position until it fits your setup.
 
-## What is LyricsScreen?
+It reads what is playing from the Windows media session, so it works with Spotify, YouTube Music, browser players and anything else that reports to Windows. Lyrics come from [LRCLIB](https://lrclib.net).
 
-LyricsScreen shows live, time-synced lyrics and a customizable music HUD on your Windows desktop. Use a compact player card, a floating karaoke overlay, or both together. Colors, animations and position are yours to change.
-
-It reads playback information from the Windows media session API, so it works with compatible apps such as Spotify, YouTube Music and browser-based players. Synchronized lyrics come from [LRCLIB](https://lrclib.net).
-
-<p align="center">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+<img src="assets/dotline.svg" width="100%" alt="">
 
 ## Hear it. Read it.
 
-Try the preview on the website: **[lyricscreen.netlify.app](https://lyricscreen.netlify.app)**
+The website has a live preview of the lyrics view: **[lyricscreen.netlify.app](https://lyricscreen.netlify.app)**
 
-Play a song from the songs folder, or paste a YouTube link. The player finds the track, fetches synced lyrics from LRCLIB and follows the music line by line.
+Play the demo song or paste a YouTube link. It finds the track, fetches synced lyrics from LRCLIB and follows the music line by line. The preview has two lyric modes:
 
-<p align="center">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+- **Box Lyrics** keeps the lyrics inside the player window.
+- **Screen Lyrics** drops the box and shows one line at a time, moving around your whole screen.
+
+<img src="assets/dotline.svg" width="100%" alt="">
 
 ## Everything on your screen.
 
-Built for people who want lyrics in front of them while they listen, work or play.
+Lyrics in front of you while you listen, work or play.
 
-| | |
+| Feature | What you get |
 |---|---|
-| **Synchronized lyrics** | Timed lyrics with current-line highlighting, anticipation and per-track timing offsets. |
-| **Player card** | Album art, track details, progress, volume, playback status and an equalizer. |
-| **Floating lyrics** | Place lyrics above your desktop or on the wallpaper layer. |
-| **Live clock** | A draggable clock with configurable date, time format, size, opacity and background. |
+| **Synced lyrics** | Timed lyrics with current line highlighting, anticipation and per-track timing offsets. |
+| **Player card** | Album art, track info, progress, volume, playback status and an equalizer. |
+| **Floating lyrics** | Lyrics above your windows or on the wallpaper layer, placed anywhere. |
+| **Live clock** | A draggable clock with its own date, format, size, opacity and background. |
 | **Themes** | Cyber Neon, Frosted Glass, Aurora, Synthwave, Midnight, Sakura, Ember, Emerald, Crystal and more. |
 | **Customization** | Colors, gradients, fonts, blur, transparency, borders, shadows, glow and card layout. |
-| **Animations and effects** | Lyric transitions, scanlines, glitch effects, flicker and 3D tilt. |
-| **Multiple monitors** | Choose the display for the floating lyrics. |
-| **Quick controls** | System tray menu, global hotkeys and Quick Customize. |
-| **Profiles and share codes** | Save settings or share most non-file-based customization. |
-| **Optional extras** | Google Fonts search, launch audio, welcome screen and automatic update checks. |
-| **Free and open source** | No account, no paywall. The code is on GitHub. |
+| **Animation and effects** | Lyric transitions, scanlines, glitch, flicker and 3D tilt. |
+| **Multiple monitors** | Pick which screen shows the floating lyrics. |
+| **Quick controls** | Tray menu, global hotkeys and Quick Customize. |
+| **Profiles and share codes** | Save a setup and share it with a code. |
+| **Extras** | Google Fonts search, launch audio, a welcome screen and update checks. |
+| **Free and open source** | No account, no paywall. The code is here on GitHub. |
 
 ### Display modes
 
-**Player card** — A desktop music card showing album artwork, track information, playback progress, volume and visualizer.
+- **Player card.** Album art, track info, progress, volume and visualizer in one card.
+- **Floating lyrics.** A standalone overlay with its own position, size, colors and animation.
+- **Card and floating lyrics.** Both at once, each customized separately.
+- **Live clock.** An optional clock that follows your theme.
 
-**Floating lyrics** — A standalone karaoke-style overlay with adjustable position, size, colors and animation.
-
-**Card + floating lyrics** — Use the player card and lyrics overlay together. Each can be customized independently.
-
-**Live clock** — An optional draggable clock that follows the application's theme.
-
-> Add screenshots to the repository and link them here when ready. For example: `![Player card](assets/player-card.png)`
-
-<p align="center">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+<img src="assets/dotline.svg" width="100%" alt="">
 
 ## One click. Ready to use.
 
-LyricsScreen is written in Python and packaged with PyInstaller into a single executable. There is no setup wizard and nothing else to install.
+LyricScreen is written in Python and packaged with PyInstaller into a single executable. There is no setup wizard and nothing else to install.
 
-**1. Download** — Get the .exe from the latest release on GitHub.
-
-**2. Run it once** — On first launch it installs itself into Program Files and puts a shortcut on your desktop.
-
-**3. Play music** — Start a song and the synced lyrics appear. Open it any time from the desktop shortcut.
+1. **Download.** Get the `.exe` from the [latest release](https://github.com/CyberSecPwnerrr/LyricScreen/releases).
+2. **Run it once.** On first launch it installs itself into Program Files and adds a shortcut to your desktop.
+3. **Play music.** Start a song and the synced lyrics appear. Open it any time from the desktop shortcut.
 
 ### Download it via command? No problem.
 
-Copy one of these (Ctrl + C), press **Win + R**, paste it in (Ctrl + V) and press **Enter**. It fetches the latest release and saves it to your Downloads folder.
+Copy one of these (Ctrl + C), press **Win + R**, paste it in (Ctrl + V) and press **Enter**. It downloads the latest release to your Downloads folder and opens the folder.
 
-**CMD**
+CMD:
 
 ```bat
 cmd /c powershell -c "$ProgressPreference=0;$a=(irm https://api.github.com/repos/CyberSecPwnerrr/LyricScreen/releases/latest).assets|?{$_.name -like '*.exe'}|select -f 1;iwr $a.browser_download_url -OutFile $HOME\Downloads\LyricScreen.exe;ii $HOME\Downloads"
 ```
 
-**PowerShell**
+PowerShell:
 
 ```powershell
 powershell -c "$ProgressPreference=0;$a=(irm https://api.github.com/repos/CyberSecPwnerrr/LyricScreen/releases/latest).assets|?{$_.name -like '*.exe'}|select -f 1;iwr $a.browser_download_url -OutFile $HOME\Downloads\LyricScreen.exe;ii $HOME\Downloads"
@@ -113,7 +105,7 @@ powershell -c "$ProgressPreference=0;$a=(irm https://api.github.com/repos/CyberS
 
 ### Run from source
 
-**Requirements:** Windows 10 or 11 and Python 3.9 or newer.
+Needs Windows 10 or 11 and Python 3.9 or newer.
 
 ```bash
 git clone https://github.com/CyberSecPwnerrr/LyricScreen.git
@@ -121,152 +113,160 @@ cd LyricScreen
 python lyrics_hud.py
 ```
 
-When launched from source, LyricsScreen checks for and installs its required Python packages.
+On first launch from source it checks for and installs the Python packages it needs.
 
 ### Under the hood
 
 | | |
 |---|---|
-| **Language** | Python. |
-| **Packaging** | PyInstaller, built into one executable file. |
-| **Installation** | The program copies itself into Program Files on first start. No separate installer. |
-| **Shortcut** | A desktop shortcut is created automatically, so it is ready right away. |
-| **Lyrics** | Synced lyrics from LRCLIB. |
-| **Platform** | Windows. |
-| **Source** | Open on GitHub. You can also run it from source. |
-| **Price** | Free, with no account. |
+| **Language** | Python |
+| **Packaging** | PyInstaller, one executable file |
+| **Installation** | Copies itself into Program Files on first start. No separate installer. |
+| **Shortcut** | Created on your desktop automatically |
+| **Lyrics** | Synced lyrics from LRCLIB |
+| **Platform** | Windows |
+| **Source** | Open on GitHub |
+| **Price** | Free, no account |
 
 ### Compatibility
 
-LyricsScreen uses the Windows media session API to detect playback. The player must expose its current media session to Windows. Browser-based players may require hardware media controls to be enabled.
+Playback is detected through the Windows media session API, so the player has to report its current media to Windows. Browser players may need hardware media controls turned on.
 
-Lyrics are provided by LRCLIB. A track needs a matching synchronized-lyrics entry for lyrics to appear.
+A track only shows lyrics if LRCLIB has a synced entry for it.
 
-<p align="center">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+<img src="assets/dotline.svg" width="100%" alt="">
 
 ## Controls
 
-### Mouse
+**Mouse**
 
 | Action | Result |
 |---|---|
 | Click the progress bar | Seek through the track |
-| Scroll over the player card | Adjust volume |
+| Scroll over the player card | Change the volume |
 | Right-click the player card | Open the quick menu |
 | Click the tray icon | Show or hide the HUD |
 | Drag the clock | Move the clock |
 
-### Global hotkeys
+**Global hotkeys**
 
-The default modifier is `Ctrl + Alt + Shift`.
+The default modifier is `Ctrl + Alt + Shift`. Hotkeys can be turned off in Settings.
 
 | Shortcut | Action |
 |---|---|
-| `Ctrl + Alt + Shift + J` | Move lyrics earlier by 100 ms |
-| `Ctrl + Alt + Shift + K` | Move lyrics later by 100 ms |
+| `Ctrl + Alt + Shift + J` | Lyrics 100 ms earlier |
+| `Ctrl + Alt + Shift + K` | Lyrics 100 ms later |
 | `Ctrl + Alt + Shift + H` | Reset lyric timing |
-| `Ctrl + Alt + Shift + N` | Snap the current lyric line to playback |
+| `Ctrl + Alt + Shift + N` | Snap the current line to playback |
 | `Ctrl + Alt + Shift + V` | Show or hide the HUD |
 
-Hotkeys can be disabled in Settings. The tray menu also includes playback, display-mode, synchronization and position controls.
+The tray menu also has playback, display mode, sync and position controls.
 
 ## Settings
 
-Open **Settings** from the system tray menu.
+Open **Settings** from the tray menu.
 
 | | |
 |---|---|
-| **Appearance** | Themes, colors, gradients, card styles, blur, opacity, borders, shadows and glow. |
-| **Lyrics** | Font, size, spacing, highlighting, anticipation, timing and placement. |
-| **Animation** | Entry and exit styles, idle motion, visual effects and frame-rate limits. |
-| **Player card** | Layout, album art, track details, volume, equalizer and background. |
-| **Overlay** | Display layer, monitor selection, lyric size, width and wallpaper dimming. |
-| **Clock** | Time format, date, size, opacity and background. |
-| **Profiles** | Save and load named settings profiles. |
-| **Share codes** | Export and import most settings that do not depend on local files. |
+| **Appearance** | Themes, colors, gradients, card styles, blur, opacity, borders, shadows and glow |
+| **Lyrics** | Font, size, spacing, highlighting, anticipation, timing and placement |
+| **Animation** | Entry and exit styles, idle motion, effects and frame rate limits |
+| **Player card** | Layout, album art, track details, volume, equalizer and background |
+| **Overlay** | Display layer, monitor, lyric size, width and wallpaper dimming |
+| **Clock** | Time format, date, size, opacity and background |
+| **Profiles** | Save and load named setups |
+| **Share codes** | Export and import settings that do not depend on local files |
 
-Share codes do not include custom images, downloaded fonts or launch-audio files. Those files must be selected separately on another computer.
+Share codes do not include custom images, downloaded fonts or launch audio. Select those again on the other computer.
 
-## Data and privacy
+## Your data
 
-LyricsScreen stores its settings and cached data locally:
+Everything stays on your PC, in `%APPDATA%\LyricsHUD\`.
 
-```text
-%APPDATA%\LyricsHUD\
-```
-
-| File or folder | Purpose |
+| Path | What it holds |
 |---|---|
-| `config.json` | Application settings |
-| `track_offsets.json` | Per-track lyric timing |
+| `config.json` | Your settings |
+| `track_offsets.json` | Lyric timing per track |
 | `cache/` | Cached lyrics |
 | `profiles/` | Saved profiles |
-| `Font/` | Fonts available to the application |
+| `Font/` | Fonts the app can use |
 
-LyricsScreen contacts LRCLIB to look up lyrics when they are not already cached. Google Fonts search and downloads also require an internet connection.
-
-<p align="center">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+It only goes online to look up lyrics that are not cached, and for Google Fonts search and downloads.
 
 ## Troubleshooting
 
-**No lyrics appear**
-- Check whether synchronized lyrics are available for the track on LRCLIB.
-- Check that the detected title and artist are correct.
-- Make sure you have an internet connection if the lyrics are not cached.
+<details>
+<summary><b>No lyrics appear</b></summary>
 
-**No music is detected**
-- Check whether the player appears in the Windows volume flyout.
-- Enable browser hardware media controls if you use a browser.
-- Play or pause the track to refresh its media session.
+- Check that LRCLIB has synced lyrics for the track.
+- Check that the detected title and artist are right.
+- Make sure you are online if the lyrics are not cached yet.
 
-**Lyrics are out of sync**
-- Use `Ctrl + Alt + Shift + J` or `K` to adjust timing.
-- Use the snap-sync shortcut to align the current line.
-- Reset the offset if needed.
+</details>
 
-**The player card or clock is off-screen**
-- Use the reset-position actions in the tray menu or clock settings.
+<details>
+<summary><b>No music is detected</b></summary>
 
-**A custom image, font or sound is missing**
-- Check that the file still exists at its selected path. Share codes do not package local files.
+- Check that the player shows up in the Windows volume flyout.
+- If you use a browser, turn on hardware media controls.
+- Pause and play the track to refresh its media session.
 
-**The application does not launch**
-- If running from source, launch it in a terminal with `python lyrics_hud.py` to see error messages.
-- If using the executable, check Windows Security and make sure it came from the official Releases page.
+</details>
 
-<p align="center">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+<details>
+<summary><b>Lyrics are out of sync</b></summary>
+
+- Press `Ctrl + Alt + Shift + J` or `K` to nudge the timing.
+- Use the snap shortcut to line up the current line.
+- Reset the offset if it gets worse.
+
+</details>
+
+<details>
+<summary><b>The player card or clock is off screen</b></summary>
+
+- Use the reset position actions in the tray menu or the clock settings.
+
+</details>
+
+<details>
+<summary><b>A custom image, font or sound is missing</b></summary>
+
+- Check that the file is still at the path you picked. Share codes do not carry local files.
+
+</details>
+
+<details>
+<summary><b>It will not launch</b></summary>
+
+- From source, run `python lyrics_hud.py` in a terminal to see the error.
+- With the executable, check Windows Security and make sure it came from the official Releases page.
+
+</details>
+
+<img src="assets/dotline.svg" width="100%" alt="">
 
 ## Follow the journey.
 
-LyricsScreen is built in the open by CyberSecPwner. Every update, idea and release lands on GitHub first. If you like it, leave a star on the repo. Feedback and suggestions are welcome, send them on Discord: **Umonkstudios**.
+LyricScreen is built in the open by CyberSecPwner. Every update, idea and release lands on GitHub first. If you like it, leave a star. Feedback and suggestions are welcome on Discord: **Umonkstudios**.
 
-<p>
-  <a href="https://github.com/CyberSecPwnerrr"><img src="https://img.shields.io/badge/Follow%20on-GitHub-1c1c1c?style=for-the-badge&logo=github&logoColor=white" alt="Follow on GitHub"></a>
-  <a href="https://www.tiktok.com/@cybersecpwner"><img src="https://img.shields.io/badge/Follow%20on-TikTok-1c1c1c?style=for-the-badge&logo=tiktok&logoColor=white" alt="Follow on TikTok"></a>
-  <a href="https://lyricscreen.netlify.app"><img src="https://img.shields.io/badge/Visit-the%20website-1c1c1c?style=for-the-badge&logo=netlify&logoColor=white" alt="Visit the website"></a>
-</p>
+[GitHub](https://github.com/CyberSecPwnerrr) &nbsp;/&nbsp; [TikTok](https://www.tiktok.com/@cybersecpwner) &nbsp;/&nbsp; [Website](https://lyricscreen.netlify.app)
 
 ## Credits
 
-- [LRCLIB](https://lrclib.net) — synchronized lyrics.
-- [PyQt6](https://pypi.org/project/PyQt6/) — application interface.
-- [WinRT for Python](https://pypi.org/project/winrt-runtime/) — Windows Runtime integration.
-- [Google Fonts](https://fonts.google.com/) — font library.
-- [CyberSecPwner](https://github.com/CyberSecPwnerrr) — creator.
+[LRCLIB](https://lrclib.net) for synced lyrics, [PyQt6](https://pypi.org/project/PyQt6/) for the interface, [WinRT for Python](https://pypi.org/project/winrt-runtime/) for Windows Runtime access and [Google Fonts](https://fonts.google.com/) for fonts.
 
-<p align="center">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+<img src="assets/dotline.svg" width="100%" alt="">
 
-<div align="center">
+<h2 align="center">V10 is out now.</h2>
 
-## V10 is out now.
+<p align="center">
+  Free, forever. Windows. Run it once and it is installed.<br><br>
+  <a href="https://github.com/CyberSecPwnerrr/LyricScreen/releases"><b>Download from GitHub</b></a>
+  &nbsp;&nbsp;/&nbsp;&nbsp;
+  <a href="https://lyricscreen.netlify.app">lyricscreen.netlify.app</a>
+</p>
 
-Free, forever. Windows. Run it once and it is installed.
-
-<a href="https://github.com/CyberSecPwnerrr/LyricScreen/releases"><img src="https://img.shields.io/badge/Download%20from-GitHub-1c1c1c?style=for-the-badge&logo=github&logoColor=white" alt="Download from GitHub"></a>
-<a href="https://lyricscreen.netlify.app"><img src="https://img.shields.io/badge/Website-lyricscreen.netlify.app-1c1c1c?style=for-the-badge&logo=netlify&logoColor=white" alt="Website"></a>
-
-**LyricsScreen** · Your music, your lyrics, your desktop.
-
-Made by [CyberSecPwner](https://github.com/CyberSecPwnerrr)
-
-</div>
+<p align="center">
+  <sub>Made by <a href="https://github.com/CyberSecPwnerrr">CyberSecPwner</a></sub>
+</p>
