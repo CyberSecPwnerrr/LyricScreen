@@ -1,369 +1,201 @@
-![LyricsScreen Banner](assets/banner.png)
-# 📃 LyricScreen Website
-**https://lyricscreen.netlify.app**
 <div align="center">
 
-# 🎵 Lyrics HUD — LyricsScreen
+  <img src="assets/banner.png" alt="LyricsScreen banner" width="100%">
 
-**Live, time-synced lyrics and a customizable desktop music experience for Windows.**
+  # LyricsScreen
 
-A music player card, floating karaoke lyrics, live clock, custom themes, and animated desktop widgets — all in one application.
+  **Live, time-synced lyrics and a customizable music HUD for Windows.**
 
-Works with music apps that expose playback information through the Windows media session API, including Spotify, YouTube Music, and supported browser-based players. Lyrics appear when a suitable synchronized version is available through LRCLIB.
+  Works with compatible music players through the Windows media session API.
 
-[Features](#-features) · [Getting Started](#-getting-started) · [Controls](#-controls) · [Settings](#️-settings) · [Troubleshooting](#-troubleshooting)
+  <p>
+    <a href="https://github.com/CyberSecPwnerrr/LyricScreen/releases">
+      <img src="https://img.shields.io/badge/Download-Latest%20Release-2f81f7?style=for-the-badge&logo=github&logoColor=white" alt="Download latest release">
+    </a>
+    <a href="https://github.com/CyberSecPwnerrr/LyricScreen">
+      <img src="https://img.shields.io/github/stars/CyberSecPwnerrr/LyricScreen?style=for-the-badge&logo=github&label=Stars" alt="GitHub stars">
+    </a>
+    <a href="https://github.com/CyberSecPwnerrr/LyricScreen">
+      <img src="https://img.shields.io/github/downloads/CyberSecPwnerrr/LyricScreen/total?style=for-the-badge&logo=github&logoColor=white&label=Downloads&color=2f81f7" alt="Total GitHub downloads">
+    </a>
+  </p>
+
+  <p>
+    <a href="#features">Features</a> ·
+    <a href="#screenshots-and-display-modes">Display modes</a> ·
+    <a href="#installation">Installation</a> ·
+    <a href="#controls">Controls</a> ·
+    <a href="#troubleshooting">Troubleshooting</a>
+  </p>
 
 </div>
 
-<p align="center">
-  <a href="https://github.com/CyberSecPwnerrr/LyricScreen/releases">
-    <img src="assets/download.png" alt="Download LyricsScreen" width="600">
-  </a>
-</p>
-
-<details>
-<summary><strong>✨ Click Here to See What's New in V8</strong></summary>
-
-<br>
-
-### 🆕 What's New in V8
-
-V8 takes LyricsScreen to the next level with more control, deeper customization, new desktop widgets, and enhanced visual effects!
-
-- 📊 **System Performance Monitor** — Track CPU, RAM, FPS, rendering performance, and running processes directly on your desktop.
-- 🎛️ **Customizable Top Bar** — A new configurable interface with animated equalizer bars, adjustable positioning, and layout options.
-- 🎨 **Expanded Theme System** — Explore more visual themes, including Aurora, Frosted Glass, Crystal, Sakura, Emerald, and more.
-- 🌈 **Advanced Color Modes** — New adaptive color palettes, custom lyric gradients, and additional color combinations.
-- ✨ **Enhanced Lyric Animations** — More entrance and exit effects, smoother transitions, and customizable idle animations.
-- 🖥️ **Desktop Wallpaper Lyrics** — Display lyrics as part of your desktop wallpaper layer, with adjustable dimming and blending.
-- 🖥️ **Multi-Monitor Support** — Choose which screen displays your floating lyrics and customize their size and positioning.
-- 🎚️ **Advanced Performance Controls** — Fine-tune animation FPS and optimization settings for a smoother experience.
-- 🎵 **Improved Player Controls** — Better volume control, playback shortcuts, and more control over the player overlay.
-- 🧊 **More Visual Customization** — Adjust card sizes, glass effects, blur, shadows, borders, glow, and transparency.
-- ⌨️ **Keyboard Shortcuts** — Control playback and synchronize lyrics more conveniently.
-- 🔄 **Automatic Updates** — Optional update checks to help you stay up to date.
-- ⚙️ **More Settings & Fine-Tuning** — Additional options for lyric placement, synchronization, animations, interface behavior, and widgets.
-
-**V8 is all about more control, more personalization, and a better desktop lyrics experience.**
-
-💜 Thanks for supporting LyricsScreen! Don't forget to ⭐ star the project on GitHub and follow for future updates.
-
-</details>
-
 ---
 
-## ✨ Features
+## What is LyricsScreen?
 
-### Music and lyrics
-- 🎤 **Synchronized lyrics** — retrieved from [LRCLIB](https://lrclib.net) and cached locally.
-- 🎵 **Broad media-session support** — works with compatible players that expose playback information through the Windows media session API.
-- 🖥️ **Three display modes** — Player card, Floating lyrics, or Card + floating lyrics.
-- 🎵 **Customizable player card** — album artwork, title, artist, album, progress, volume, status, and equalizer visualization.
-- 🎙️ **Karaoke highlighting** — current-line highlighting with adjustable anticipation and dimming for unsung text.
-- ⏱️ **Sync controls** — per-track offsets, 100 ms adjustments, and snap-sync for the current or next lyric line.
-- 🔔 **Now-playing notifications** — optional track-change toast showing the title and artist.
+LyricsScreen puts your music controls and synchronized lyrics directly on your desktop. Use a compact player card, a floating karaoke overlay, or both together. You can customize the appearance, animations, colors, and position to fit your desktop.
 
-### Desktop widgets and appearance
-- 🕒 **Live desktop clock** — draggable themed clock with 12/24-hour format, optional seconds and date, adjustable size and opacity, and a custom background image.
-- 🎨 **Built-in themes** — Cyber Neon, Frosted Glass, Pure Minimal, Aurora, Synthwave, Midnight, Sakura, Ember, Emerald, Crystal, and Custom.
-- 🌈 **Adaptive album-art colors** — choose color treatments such as vibrant, pastel, deep, complementary, triadic, analogous, and monochrome.
-- 🖼️ **Custom images** — use images or animated GIFs for the player card, clock, lyrics text, and menu wallpaper where supported.
-- 🪟 **Wallpaper and always-on-top layers** — put floating lyrics on the desktop wallpaper layer or above other windows.
-- 🧊 **Card styling** — gradient, frosted-glass, flat, and animated aurora styles, with adjustable blur, glass, border, shadow, glow, and corner radius.
-- 🌌 **Visual effects** — scanlines, glitch and chroma ghosting, flicker, glow, 3D tilt, and ghost lines.
-- 🎬 **Rich lyric animations** — classic slide, rise, drop, zoom, fade, flip, bounce, stretch, swing, spin, and random entry styles, plus configurable exits and idle motion.
-- 📍 **Flexible placement** — fixed or random lyric positions, adjustable overlay size and line width, and multi-monitor selection.
-- 🖋️ **Font customization** — choose local fonts or search for and download fonts from Google Fonts.
-- 🎚️ **Performance controls** — configurable animation frame rate and Off, Balanced, or Performance optimization modes.
-- 🪟 **Fullscreen behavior** — optionally hide the card, clock, and lyrics while another app is fullscreen.
-- 🖱️ **Click-through lock** — allow interaction with windows underneath the floating overlay when enabled.
+It reads playback information from the Windows media session API, so it can work with compatible apps such as Spotify, YouTube Music, and browser-based players. Synchronized lyrics are fetched from [LRCLIB](https://lrclib.net).
 
-### Personalization and convenience
-- ⚡ **Quick Customize** — access common appearance controls without opening the full settings window.
-- 🎛️ **Extensive settings** — customize lyrics, card layout, colors, typography, animation, overlays, clock, and interface behavior.
-- 💾 **Settings profiles** — save and load named configuration profiles.
-- 🔗 **Shareable settings codes** — export your non-file-based customization as a compact code and import a code from someone else.
-- 🔊 **Launch audio** — optionally play a chosen sound when LyricsScreen starts, with volume control and a test option.
-- 👋 **Welcome screen** — optional startup greeting with a preview.
-- 🧭 **Customizable interface** — configure the settings/menu wallpaper, title bar style and position, window buttons, interface animations, and menu appearance.
-- 🎛️ **System tray controls** — manage playback, display modes, synchronization, quick customization, settings, and application exit.
-- ⌨️ **Global hotkeys** — adjust lyric timing and show or hide the HUD.
+## Features
 
----
+- **Synchronized lyrics** — timed lyrics with current-line highlighting, anticipation, and per-track timing offsets.
+- **Player card** — album art, track details, progress, volume, playback status, and an equalizer.
+- **Floating lyrics** — place lyrics above your desktop or on the wallpaper layer.
+- **Live clock** — draggable clock with configurable date, time format, size, opacity, and background.
+- **Themes** — Cyber Neon, Frosted Glass, Aurora, Synthwave, Midnight, Sakura, Ember, Emerald, Crystal, and more.
+- **Customization** — colors, gradients, fonts, blur, transparency, borders, shadows, glow, and card layout.
+- **Animations and effects** — lyric transitions, scanlines, glitch effects, flicker, and 3D tilt.
+- **Multiple monitors** — choose the display for the floating lyrics.
+- **Quick controls** — system tray menu, global hotkeys, and Quick Customize.
+- **Profiles and share codes** — save settings or share most non-file-based customization.
+- **Optional extras** — Google Fonts search, launch audio, welcome screen, and automatic update checks.
 
-## 📸 Display Modes
+## Screenshots and display modes
 
-### Player Card
+### Player card
+A desktop music card showing album artwork, track information, playback progress, volume, and visualizer.
 
-A customizable music player card with album artwork, track information, progress, volume controls, status, and an equalizer visualizer. Choose from multiple card sizes and visual styles, and adjust the card's background, blur, glow, border, and shadow.
+### Floating lyrics
+A standalone karaoke-style overlay with adjustable position, size, colors, and animation.
 
-### Floating Lyrics
+### Card + floating lyrics
+Use the player card and lyrics overlay together. Each can be customized independently.
 
-A standalone karaoke overlay that can sit on the desktop wallpaper layer or remain above other windows. Customize line placement, width, size, colors, animations, and effects.
+### Live clock
+An optional draggable clock that follows the application's theme.
 
-### Card + Floating Lyrics
+> Add screenshots to the repository and link them here when ready. For example: `![Player card](assets/player-card.png)`
 
-Combine the player card and floating lyrics for a complete desktop music experience. The card and lyrics can be configured independently, including whether lyrics may appear over the card and clock.
+## Installation
 
-### Live Clock
+### Option 1: Download the Windows release
 
-An optional draggable clock widget that follows the application's theme. Configure the time format, seconds, date, size, opacity, and its own background image, blur, and opacity.
-
----
-
-## 📋 Requirements
-
-- **Operating system:** Windows 10 or Windows 11.
-- **Python:** Python 3.9 or newer when running from source.
-- **Internet connection:** Required to retrieve uncached lyrics and search/download Google Fonts.
-- **Music app:** A player that exposes playback information through the Windows media session API.
-- **Lyrics availability:** A suitable synchronized lyrics entry must be available in LRCLIB for lyrics to display.
-
----
-
-## 🚀 Getting Started
-
-### Option 1: Run the executable
-
-1. Open the [LyricsScreen Releases](https://github.com/CyberSecPwnerrr/LyricScreen/releases) page.
+1. Open the [GitHub Releases](https://github.com/CyberSecPwnerrr/LyricScreen/releases) page.
 2. Download the latest Windows executable, if a release is available.
-3. Run the downloaded executable and follow any Windows installation prompts.
-4. Start playing music in your preferred music app.
+3. Run it and follow any Windows prompts.
+4. Start playing music in a supported player.
 
-The packaged executable includes the dependencies needed to run the application. The installer may request permission to install LyricsScreen under Program Files and create a desktop shortcut.
+The packaged executable includes the dependencies needed to run the application.
 
-> **Note:** A downloadable executable must be published in GitHub Releases. If no release is available, use Option 2.
+### Option 2: Run from source
 
-### Option 2: Run from source using Python
-
-#### 1. Install Python
-
-Install Python 3.9 or newer if it is not already installed.
-
-#### 2. Clone the repository
+**Requirements:** Windows 10 or 11 and Python 3.9 or newer.
 
 ```bash
 git clone https://github.com/CyberSecPwnerrr/LyricScreen.git
 cd LyricScreen
-```
-
-#### 3. Launch LyricsScreen
-
-```bash
 python lyrics_hud.py
 ```
 
-When run from source, LyricsScreen checks for and installs its required Python packages. Optional packages are also attempted for additional features.
+When launched from source, LyricsScreen checks for and installs its required Python packages.
 
-#### 4. Start playing music
+## Compatibility
 
-Play a track in your preferred music app. The **♪ system tray icon** provides access to playback controls, display modes, Quick Customize, and settings.
+LyricsScreen uses the Windows media session API to detect playback. The player must expose its current media session to Windows. Browser-based players may require hardware media controls to be enabled.
 
-> **Browser support:** Browser-based music players must expose playback information through the Windows media session API. Hardware media controls are generally available in browsers such as Chrome, Brave, and Edge when media-session integration is enabled.
+Lyrics are provided by LRCLIB. A track needs a matching synchronized-lyrics entry for lyrics to appear.
 
----
+## Controls
 
-## 🎮 Controls
-
-### Mouse Controls
+### Mouse
 
 | Action | Result |
 |---|---|
 | Click the progress bar | Seek through the track |
-| Scroll over the player card | Change volume |
+| Scroll over the player card | Adjust volume |
 | Right-click the player card | Open the quick menu |
 | Click the tray icon | Show or hide the HUD |
+| Drag the clock | Move the clock |
 
-The clock can be dragged to reposition it. Use the tray menu's reset-position actions when a widget is difficult to find.
+### Global hotkeys
 
-### Global Hotkeys
-
-The default global hotkeys use **Ctrl + Alt + Shift** as the modifier combination.
+The default modifier is `Ctrl + Alt + Shift`.
 
 | Shortcut | Action |
 |---|---|
-| `Ctrl + Alt + Shift + J` | Adjust lyrics earlier by 100 ms |
-| `Ctrl + Alt + Shift + K` | Adjust lyrics later by 100 ms |
-| `Ctrl + Alt + Shift + H` | Reset the synchronization offset |
-| `Ctrl + Alt + Shift + N` | Snap the current lyric line to the current time |
+| `Ctrl + Alt + Shift + J` | Move lyrics earlier by 100 ms |
+| `Ctrl + Alt + Shift + K` | Move lyrics later by 100 ms |
+| `Ctrl + Alt + Shift + H` | Reset lyric timing |
+| `Ctrl + Alt + Shift + N` | Snap the current lyric line to playback |
 | `Ctrl + Alt + Shift + V` | Show or hide the HUD |
 
-Hotkeys can be disabled in settings. The tray menu also offers synchronization controls, including snapping the next lyric line to the current time.
+Hotkeys can be disabled in Settings. The tray menu also includes playback, display-mode, synchronization, and position controls.
 
-### System Tray Menu
+## Settings
 
-The tray menu provides access to:
+Open **Settings** from the system tray menu.
 
-- Play or pause, next track, and previous track.
-- Show or hide the HUD.
-- Display mode selection.
-- Locking the player card in place.
-- Toggling album-art color matching.
-- Lyric timing adjustments, reset, and snap-sync.
-- Settings and Quick Customize.
-- Resetting the card position.
-- Quitting the application.
+- **Appearance:** themes, colors, gradients, card styles, blur, opacity, borders, shadows, and glow.
+- **Lyrics:** font, size, spacing, highlighting, anticipation, timing, and placement.
+- **Animation:** entry and exit styles, idle motion, visual effects, and frame-rate limits.
+- **Player card:** layout, album art, track details, volume, equalizer, and background.
+- **Overlay:** display layer, monitor selection, lyric size, width, and wallpaper dimming.
+- **Clock:** time format, date, size, opacity, and background.
+- **Profiles:** save and load named settings profiles.
+- **Share codes:** export and import most settings that do not depend on local files.
 
----
+Share codes do not include custom images, downloaded fonts, or launch-audio files. Those files must be selected separately on another computer.
 
-## ⚙️ Settings
+## Data and privacy
 
-Open **Settings** from the system tray menu. The available options cover the main player, lyrics, overlay, animations, typography, widgets, and interface.
-
-### Themes and Appearance
-
-Choose a built-in theme or configure a custom look. Adjust accent and secondary colors, text color, adaptive album-art colors, card style, glass effect, blur, background images, border, shadow, glow, and corner radius.
-
-### Lyrics and Typography
-
-Configure lyric size, font weight, spacing, letter case, fill style, custom or gradient colors, outline, shadow, glow color, line spacing, karaoke highlighting, anticipation, fade timing, and placement.
-
-Choose a font installed in the font folder or search Google Fonts and download a font for use in LyricsScreen.
-
-### Animation and Effects
-
-Configure lyric entry, exit, and idle animations. Tune motion, scanlines, glitch intensity, chroma ghosting, flicker, 3D tilt, animation frame rate, and optimization mode.
-
-### Player Card
-
-Configure card size and layout, album artwork, album name, status line, volume, equalizer, synchronization buttons, background image, blur, opacity, glow, and other visual details.
-
-### Floating Overlay
-
-Choose the lyrics layer, target monitor, overlay lyric size, line width, wallpaper dimming, and blend mode. Enable always-on-top behavior or hide the card, clock, and lyrics while a fullscreen application is active.
-
-### Live Clock
-
-Enable or disable the clock and customize 24-hour time, seconds, date, size, opacity, and background image settings. Use **Reset clock position** if you need to return the clock to its default position.
-
-### Interface and Menu
-
-Customize the menu wallpaper, opacity, blur, dimming, interface animations, title bar style, title bar position, alignment, window-button position, height, and visible title-bar elements.
-
-### Welcome Screen and Launch Audio
-
-Enable or disable the startup welcome screen and preview it from settings. Optionally select an audio file to play on launch, set its volume, and test it.
-
-### Profiles and Share Codes
-
-Save and load named settings profiles to switch between configurations. You can also generate a share code for most non-file-based settings and import a code to apply another configuration.
-
-Share codes do not package local files such as custom images, downloaded fonts, or launch audio. Those file paths are intentionally excluded, so the referenced files must be selected separately on another computer.
-
----
-
-## 🎤 Lyrics and Synchronization
-
-LyricsScreen retrieves synchronized lyrics from [LRCLIB](https://lrclib.net) and caches them locally to reduce repeated network requests.
-
-**Compatibility:** LyricsScreen is designed to work with any music app that provides the required playback information through the Windows media session API. The music app does not need to be specifically integrated into LyricsScreen, but the current track must be detected correctly and suitable synchronized lyrics must be available in LRCLIB.
-
-If lyrics are out of sync, use the global hotkeys or synchronization controls in the tray menu.
-
-- **Fine adjustment:** Shift lyric timing in 100 ms increments.
-- **Reset:** Restore the default synchronization offset.
-- **Snap sync:** Align the current lyric line with the current playback position.
-- **Next-line snap:** Align the next lyric line with the current playback position.
-- **Per-track offsets:** Keep individual timing adjustments for specific tracks.
-- **Karaoke display:** Adjust anticipation and unsung-text brightness to tune the highlighting effect.
-
-Lyric availability depends on whether LRCLIB has a suitable synchronized entry for the current track.
-
----
-
-## 📁 Data & Privacy
-
-LyricsScreen stores its configuration and cached data locally in:
+LyricsScreen stores its settings and cached data locally:
 
 ```text
 %APPDATA%\LyricsHUD\
 ```
 
-| File or directory | Purpose |
+| File or folder | Purpose |
 |---|---|
 | `config.json` | Application settings |
-| `track_offsets.json` | Per-track synchronization offsets |
+| `track_offsets.json` | Per-track lyric timing |
 | `cache/` | Cached lyrics |
-| `profiles/` | Saved settings profiles |
-| `Font/` | Fonts available to the application, including downloaded fonts where saved |
+| `profiles/` | Saved profiles |
+| `Font/` | Fonts available to the application |
 
-The application uses the public LRCLIB API to look up lyrics for the current track. An internet connection is needed when lyrics are not available in the local cache. Searching and downloading fonts also requires an internet connection.
+LyricsScreen contacts LRCLIB to look up lyrics when they are not already cached. Google Fonts search and downloads also require an internet connection.
 
-Settings share codes contain configuration values rather than local file contents. File paths are excluded from share codes.
+## Troubleshooting
 
----
+**No lyrics appear**
+- Check whether synchronized lyrics are available for the track on LRCLIB.
+- Check that the detected title and artist are correct.
+- Make sure you have an internet connection if the lyrics are not cached.
 
-## 🛠️ Troubleshooting
+**No music is detected**
+- Check whether the player appears in the Windows volume flyout.
+- Enable browser hardware media controls if you use a browser.
+- Play or pause the track to refresh its media session.
 
-### No lyrics are showing
+**Lyrics are out of sync**
+- Use `Ctrl + Alt + Shift + J` or `K` to adjust timing.
+- Use the snap-sync shortcut to align the current line.
+- Reset the offset if needed.
 
-- Check whether synchronized lyrics are available on LRCLIB.
-- Confirm that the current track's title and artist are detected correctly.
-- Check your internet connection if the lyrics have not been cached.
+**The player card or clock is off-screen**
+- Use the reset-position actions in the tray menu or clock settings.
 
-### No media is detected
+**A custom image, font, or sound is missing**
+- Check that the file still exists at its selected path. Share codes do not package local files.
 
-- Make sure the player appears in the Windows volume flyout media controls.
-- Enable browser hardware media controls if using a browser-based player.
-- Try playing or pausing the track to refresh the media session.
-- Verify that the music app exposes playback information through the Windows media session API.
+**The application does not launch**
+- If running from source, launch it in a terminal with `python lyrics_hud.py` to see error messages.
+- If using the executable, check Windows Security and make sure it came from the official Releases page.
 
-### Lyrics are out of sync
+## Credits
 
-- Use `Ctrl + Alt + Shift + J` or `Ctrl + Alt + Shift + K` for fine adjustments.
-- Use the snap-sync shortcut to align the current lyric line.
-- Try snapping the next lyric line from the tray menu.
-- Reset the offset if the timing becomes incorrect.
-
-### The player card or clock is off-screen
-
-Open the system tray menu and use **Reset card position** or **Reset clock position** in settings.
-
-### A custom image, font, or sound is missing
-
-Check that the file still exists at the selected path. Share codes do not include local assets; select those files separately after importing a code or moving settings to another computer.
-
-### Google Fonts search or download fails
-
-Check your internet connection and try again. You can also use a font file already available in the application's font folder.
-
-### Dependencies fail to install
-
-Verify that Python 3.9 or newer is installed, then update pip:
-
-```bash
-python -m pip install --upgrade pip
-```
-
-Retry by launching the application again:
-
-```bash
-python lyrics_hud.py
-```
-
-### The application does not launch
-
-When running from source, launch it from a terminal to inspect any error messages:
-
-```bash
-python lyrics_hud.py
-```
-
-If using the executable, check whether Windows Security has blocked it and ensure you downloaded it from the official repository.
-
----
-
-## 🙏 Credits
-
-- [LRCLIB](https://lrclib.net) — synchronized lyrics API.
-- [PyQt6](https://pypi.org/project/PyQt6/) — graphical user interface.
+- [LRCLIB](https://lrclib.net) — synchronized lyrics.
+- [PyQt6](https://pypi.org/project/PyQt6/) — application interface.
 - [WinRT for Python](https://pypi.org/project/winrt-runtime/) — Windows Runtime integration.
-- [Google Fonts](https://fonts.google.com/) — searchable font library.
+- [Google Fonts](https://fonts.google.com/) — font library.
+ CyberSecPwner (Me)
+---
 
 <div align="center">
 
-**LyricsScreen — Your music. Your lyrics. Your desktop.**
+**LyricsScreen** · Your music, your lyrics, your desktop.
 
-Made with 🎵 by [CyberSecPwner](https://github.com/CyberSecPwnerrr)
+Made by [CyberSecPwner](https://github.com/CyberSecPwnerrr)
 
 </div>
