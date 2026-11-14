@@ -15,6 +15,7 @@
   <a href="https://github.com/CyberSecPwnerrr/LyricScreen/releases"><img src="https://img.shields.io/badge/%E2%AC%87%20Download%20V10-ffffff?style=for-the-badge&labelColor=0a0a0a&color=1f1f1f" alt="Download V10"></a>
   <a href="https://lyricscreen.netlify.app"><img src="https://img.shields.io/badge/%F0%9F%8C%90%20Website-ffffff?style=for-the-badge&labelColor=0a0a0a&color=1f1f1f" alt="Website"></a>
   <a href="https://github.com/CyberSecPwnerrr/LyricScreen"><img src="https://img.shields.io/badge/%F0%9F%92%BB%20Source-ffffff?style=for-the-badge&labelColor=0a0a0a&color=1f1f1f" alt="Source"></a>
+  <a href="https://ko-fi.com/cybersecpwner"><img src="https://img.shields.io/badge/%E2%98%95%20Buy%20me%20a%20Ko--fi-ffffff?style=for-the-badge&labelColor=0a0a0a&color=FF5E5B" alt="Buy me a Ko-fi"></a>
 </p>
 
 <p align="center">
@@ -450,6 +451,16 @@ LyricScreen is built in the open by CyberSecPwner. Every update, idea and releas
   </a>
 </p>
 
+## Support the project
+
+LyricScreen is free and always will be. If it made your desktop better and you want to help keep updates coming, you can buy me a coffee.
+
+<p align="center">
+  <a href="https://ko-fi.com/cybersecpwner"><img src="https://img.shields.io/badge/%E2%98%95%20Support%20me%20on%20Ko--fi-ffffff?style=for-the-badge&labelColor=0a0a0a&color=FF5E5B" alt="Support me on Ko-fi"></a>
+</p>
+
+Starring the repo and sharing it with friends helps just as much.
+
 ## Credits
 
 | Project | Used for |
@@ -469,6 +480,8 @@ LyricScreen is built in the open by CyberSecPwner. Every update, idea and releas
   <a href="https://github.com/CyberSecPwnerrr/LyricScreen/releases"><b>Download from GitHub</b></a>
   &nbsp;&nbsp;/&nbsp;&nbsp;
   <a href="https://lyricscreen.netlify.app">lyricscreen.netlify.app</a>
+  &nbsp;&nbsp;/&nbsp;&nbsp;
+  <a href="https://ko-fi.com/cybersecpwner">Support on Ko-fi</a>
 </p>
 
 <p align="center">
