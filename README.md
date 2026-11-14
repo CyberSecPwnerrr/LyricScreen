@@ -49,6 +49,18 @@ Play the demo song or paste a YouTube link. It finds the track, fetches synced l
 - **Box Lyrics** keeps the lyrics inside the player window.
 - **Screen Lyrics** drops the box and shows one line at a time, moving around your whole screen.
 
+<p align="center">
+  <img src="assets/preview.gif" alt="LyricScreen live lyrics preview" width="100%">
+  <br>
+  <sub>See LyricScreen in action: synced lyrics follow the music in real time.</sub>
+</p>
+
+<p align="center">
+  <img src="assets/menu.gif" alt="LyricScreen menu preview" width="100%">
+  <br>
+  <sub>Take a look through the menu and explore the app's controls and customization options.</sub>
+</p>
+
 <img src="assets/dotline.svg" width="100%" alt="">
 
 ## Everything on your screen.
